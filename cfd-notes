@@ -1,0 +1,1537 @@
+in the name of ALLAH ALMIGHTY:
+
+exercise1.1
+
+####
+
+5+5
+
+5
+
+'hello' + ' ' + 'world'
+
+print(5+5)
+
+print('result: ', 5+5, ' !')
+
+print("result:    5+5    !")
+
+print('result:    5+5    !')
+
+print('result: %0i'   % (5+5)) # result is, result: 10
+
+print('result: %0i'   % (5+4)) # result is, result: 9
+
+print('result: %05i'  % (5+4)) # result is, result: 00009
+
+print('result: %1.2f' % (5+4)) # result is, result: 9.00
+
+print(f'result: {5+4}')        # result is, result: 9
+
+print('hello world!')          # test of the print command
+
+#%%
+
+x = 5
+print(f'x = {x}')
+
+y = 9.345
+
+myString = 'hello world'
+
+#%%
+
+print(f'before {x}')
+x = x+2.5
+print(f'after  {x}')
+
+#%%
+
+#from numpy import sin
+import numpy as np
+import matplotlib.pyplot as pl
+
+#print(np.sin(1.))
+
+x = np.linspace(0., 1., 11)
+
+y1 = 1. - 2*x
+
+pl.plot(x, y1, 'r--', label='f_1') # red dashed line
+
+pl.grid()
+
+pl.xlabel('x')
+pl.ylabel('y')
+pl.title('Figure 1')
+
+pl.legend()
+
+pl.xlim([0.2, 0.6])
+
+pl.show()
+#pl.savefig('ue1-3_plot.png')
+
+####
+
+exercise1.2-advance-python:
+
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Jun  9 12:43:53 2025
+
+@author: lubuntu
+"""
+
+#from numpy import sin
+import numpy as np
+import matplotlib.pyplot as pl
+
+# generate the 1D grid
+x = np.linspace(0., 1., 11)
+h = x[1] - x[0]	#stepsize
+
+#function implementations, also keep in mind that numpy is a very good library for numeircal computations 
+
+y1 = 1. - 2*x # this is function f_1(x)
+y2 = (x - 0.4)**2 # this is function f_2(x)
+y3 = np.sin(2 * np.pi * x) # this is function f_3(x)
+
+# filtering of data
+xFiltered=x[x<=0.5] 
+
+#filtered means we want to extract specific portion from the data, also we can also put logical expression inside the array to pick specific values, the example of it will look like x[x<0.5] so all the values which are less than 0.5 will be picked 
+
+y3Filtered=y3[x<=0.5]
+#plot data according tasks
+pl.figure(1)
+
+pl.plot(x,y1,'r--',label='f_1') #alternative for label is label='$f_1(x)$'
+pl.plot(x,y2,'b-',label='f_2')	#label='$f_2(x)$'
+pl.plot(x,y3,'g:',label='f_3')	#label='$f_3=\sin(2 \pi x)$'
+
+#by above 3 commands, we will get 3 plotting commands
+
+pl.grid()
+pl.xlabel('x')
+pl.ylabel('y')
+pl.title('Figure 1')
+
+pl.legend()
+#pl.xlim([0.2,0.6])
+
+pl.figure(2)
+pl.plot(xFiltered,y3Filtered,'go',label='f_3 filtered')
+pl.xlabel('x') 
+pl.ylabel('y')
+pl.title('Figure 2')
+
+#we can also write this instead of the above line of code
+
+#pl.plot(x[x<=0.5],y3[x<=0.5],'go',label='f_3 filtered') 
+
+#this is like filtering data on the base of mask
+
+pl.show()
+
+lecture-2-taylor-series:
+
+taylor series practical, we will do in this lecture.
+
+for learning the things, first of all try to visit the wikipedia page, sometimes it is helpful while sometimes it is not
+
+summation symbol keep it in mind 
+
+computer cannot directly integration, computer can work with discrete values or operations.
+
+question is what is taylor series and why we need taylor series in CFD?
+
+all sort of physical properities, eg velocity, distance, speed etc are variables
+
+function f(x) can be approximated by a local expansion into a polynomial
+
+f(x) may not be simple to compute: 
+
+-exp e power x
+-trig.sin(x)cos(x)
+
+in approximation you get the approximate solution and consider it the final solution rather than finding the exact solution 
+
+second thing is local expansion, the opposite of local is global. here we are saying local so it means we'll use local approximations and find the solutions with the help of it.
+
+local expansion or you can say local approximations are usually good because you need very little data to get the results unlike the global expansions in which you require huge data to find the results
+
+polynomials are functions in which there is a variable present, eg x and there is some power raise to it eg 1,2,3 etc
+
+trignometric functions are sin(x), cos(x) etc
+
+so whole moral is, when we have complex task, we will decompose it into smaller easy parts which are computer friendly
+
+so what is this function y=f(x) so what it does is, you give it the value of x and against the x value it gives you the y value 					
+----------
+exercise3.1: multi-dimensional-arrays
+
+#task3.1
+
+#matrixA=np.zeros(())
+
+matrixA=np.array([11,12,13],[21,22,23])
+print('shape of matrixA=',np.shape(matrixA))
+
+# the above command to check the shape of matrix and is a very useful command. first index is the row index and the second index is the column index
+
+----------
+restart
+lecture01
+
+watch it later
+
+exercise01.1
+
+
+ipython, use 5+5 on it directly, here it 5+5 and print it in the shell however in the other case other ide the print itself doesnot occur
+
+multiple datatypes are there in python aswell eg character datatype, string datatype etc 'hello' + 'world'. you'll get hello world print on the screen. 
+
+print(5+5)
+
+by writing it in the ipython window you'll get 10 printed without the prompt of 'out' before 10
+
+we can also combine string output with numerical output eg
+
+print('result':5+5)
+
+also keep in mind if you write this 5+5 directly in the double quotes of string 5+5 will be printed in the form of a string, the sum 10 will not be printed e.g 
+
+print("result: 5+5 !",)
+
+so instead use this, 
+
+print("result: ",5+5)
+
+another way is string formatting, 
+
+print('result: 0%i' %(5+5))
+
+print('result: %0i'%(5+4=)
+
+print('result: %05i', %(5+4)) # the output will be result: 00009 # 05i means put 4 zero digits before I so we are getting four zero digits and then is our sum i, this is type casting we are doing here. another example if want to put out value as a floating point number we can do this, 
+
+print('result: %1.2f' %(5+4)) 
+
+ it will convert our integer sum to a floating point number so our int 9 will be 9.00 in print because of 1.2f showing put two floating points after our value, this type of method is used whenever you want to print specific type of output
+
+print(f'result: {5+4}') 
+
+this is another type of string formatting, the f outside the single quote comes in combination with curly braces {} and execute mathematical expression inside a string
+
+there are multiple datatypes, this include integer,float,string,boolean etc 
+
+now we will work in the editor window which is on the left. dot py(.py) is the extension of the python script. sypder automatically produce 7 lines of code, grey and green lines. green lines showing strings, triple string indicator """""" which is used to show multi lines string. it is also known as doc string, they are placed by the spider ide by default, then there are lines starting with #. it is showing the comments. comments? is piece of source code which is not interpreted by the compiler and the interpretor. comments donot take memory while the multilines string do take space in memory 
+
+#! 
+
+shows interpretor which will be used to run the script 
+
+#!/usr/bin/env python3 
+
+here python3 is the interpretor
+
+# -*- coding: utf-8 -*-
+
+this is showing the standard utf-8
+
+in spyder we can also create cells like we did in jupyter notebook  
+
+when there are too many variables in the memory and you want to get rid of them, you can simply restart the kernel, there is remove all variables button press it to remove all the variables from the memory 
+
+variable explorer in spyder is used to check which variables are initialized yet
+
+print('hello world!')
+
+x='5'
+print(f'x={x}')
+
+y=9.345
+myString="hello world"
+
+print(f'before {x}')
+x=x+2.5
+print(f'after {x}')
+
+if we add two different datatypes directly or via using the variable we will get the type error eg of it is like 2.5+"hello" or via variable is  
+
+x=5
+y="hello" 
+x+y #type error
+
+traceback of error follows the flow from top to bottom, to analyze the error in the top to bottom fashion 
+
+to print the type of variable use this,
+
+print(f'before  {type(x)}')
+
+we can sub structure our code and run it using the button of run current cell, to make cell boundary we use #%%
+
+#%%
+
+this will create cell boundary, the portion above this will become one cell and the portion below it will become another cell and then we can use the current cell button to run the specific button 
+
+inline comment is the one written with the line of code eg
+
+x=10 # we are doing this inline comment
+
+In the exam this question can come that store some file with the name and .py extension so example of it would be assume a file name as my_program.py so save it with the extension as shown .py
+
+task3a
+
+create a new script/file and save it with .py extension 
+
+to Import external library use the import command, there are multiple ways of importing in python, first is object oriented style and second is function oriented style, eg of function oriented style is,
+
+from numpy import * #everything of numpy will be imported
+
+
+print(sin(1.))
+
+this method of importing is not recommended because It imports everything, better way is,
+
+import numpy as np
+
+print(np.sin(1.))
+
+numpy is for working with numerical data, while the matplotlib is used for plotting,
+
+import matplotlib.pyplot as pl
+
+x=np.linspace(0.,1.,11) #linspace used for linearly distributed values for a certain space 
+
+in the np array the datatype of each element should be same  
+
+y1=1.-2*x #this function will be applied to all values of the numpy array x
+
+pl.plot(y) #matplotlib takes two variables first x and second y and then plot both of them on graph eg plot(x,y,'bo') or plot(x,y,'r+')
+
+pl.plot(x,y1,'r--',label='f_1')
+pl.grid()
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('Figure 1')
+pl.legend() #widely use to hide outliers
+pl.xlim([0.2,0.6])
+pl.show()
+# pl.savefig('ue1-3_plot.png') #use this to save 
+
+exercise01.2
+#libraries importing
+import numpy as np 
+import matplotlib.pyplot as pl 
+#generate the 1D grid
+x=np.linspace(0.,1.,11)
+h=x[1]-x[0] #this will give you the step size aka the difference between two points in a uniform distribution
+#function implementation
+y1=1.-2*x #this is function f_1(x)
+y2=(x-0.4)**2 #this is function f_2(x)
+y3=np.sin(2*np.pi*x) #	this is function f_3(x)x
+#filtering of data
+xFiltered=x[x<=0.5]
+y3Filtered=y3[x<=0.5]
+#plotting of functions
+pl.figure(1)
+pl.plot(x,y1,'r--',label='$f_1(x)$') #latex syntax for f subscript 1
+pl.plot(x,y2,'b-',label='f_2')
+pl.plot(x,y3,'g:',label='$f_3=\sin (2 \pi x)$')
+pl.plot(xFiltered,y3Filtered,'go',label='f_3 filtered')
+pl.grid()
+pl.xlabel('x')
+pl.ylabel('y')
+pl.title('Figure 1')
+pl.legend() #widely use to hide outliers
+pl.figure(2)
+#pl.plot(x[x<=0.5],y[x<=0.5],'go',label='f_3 filtered') #another way to directly do the filtering way 
+pl.xlabel('x')
+pl.ylabel('y')
+pl.title('Figure 2')
+#pl.xlim([0.2,0.6])
+pl.show()
+
+when there is some data not fitting In the plots in this case we do masking of data aka filtering data limiting it to a specific range
+
+lecture02
+
+function f(x) can be calculated by the local approximation of the polynomial
+
+exercise02.1
+
+import numpy as np
+N=100
+d=2.0e-4
+
+GaussSum=0.5*d*N*(N+1)
+print('GuassSum= ',np.around(GuassSum,decimals=2))
+
+MySum=0.0
+for n in range(N+1):
+	MySum+=n*d
+print('MySum= ',np.around(MySum,decimals=2))
+
+#%%
+
+def summation(N):
+	MySum=0.0
+	for n in range(N+1):
+	MySum+=n*d
+#%%
+
+def summation(values):
+	N=len(values)
+	MySum=0.0
+	for n in range(N+1):
+		MySum+=values[n]
+	return MySum
+
+exercise02.2
+
+Convergence is important, and convergence only occur when there is consistency in our function. It means our function will converge to zero at the end. If there Is inconsistency, it means our function cannot converge and thus there will be fluctuations in the values. 
+
+there is this zero order taylor series term which is equal to constant 
+
+we've taken the values of x in an array a bit small because else wise the curve will start deviating and will move upward abnormally, you can see it by putting the value of (x subscript not aka x0) in the place of x which is -0.5 and you are getting the y value by the function as 1 similarly if you instead of range from -1 to 4 you increase the range the upper boundary the function will work In a way that you'll get the curve moving upward and upward and up to infinity that is why we took the value in the short Interval of -1 to 4
+
+task 4 is general algorithm task, we take default value of N for the taylor series as N=4 in the function such that if no value is provided automatically the taylor series of order 4 will be taken for the provided value/array x, this type of parameter we gave as N is called as keyword argument other parameters are called as positional arguments 
+
+in this function we are creating, we can initialize the returning parameter, aka the parameter we want to return as an integer variable but it depends upon our input parameter that we are giving so incase if we are passing array In the parameter, we should initialize this parameter as an array and thus to return this array at the end of the function
+
+idea: take taylor4 but generalize sum over orders
+
+(t subscript n (x,x subscript not = -0.5)) and now we are defining a sudo code for this function as follow, 
+def taylorN(x,N=4):
+	y=np.zeros_like(x) #y=[0,0,0,0];len(x)=len(y)
+
+for n in range(N+1):
+	y+=(-2)**n/factorial(n)**(x+0.5)**n
+return y
+we can also write another sudo code if you want to apply taylor series on each element of the given array y so code will be,
+
+def taylorN(x,N=4):
+	y=np.zeros_like(x)
+	for I in range(len(y)):
+		for n in range(N+1): #to make inclusive means including N value
+			y[i]+=((-2)**n)/factorial(n) * (x+0.5)**n
+	return y
+here the above sudo code will calculate the taylor-series values for each element of array y
+
+recursion is available in almost all of the programming languages and the purpose of it to recall the function again and again until the stopping condition is met, it will look like this as n!=n*(n-1)*(n-2)*(n-3)………….*3*2*1 now this means that n!=n*(n-1)! and (n-1)!
+is equal (n-1)*(n-2)! and now (n-2)!=(n-2)(n-3)! and this chain will go on until (n-x) chain here x is an integer which we are subtracting from factorial will eventually reach the stopping condition which is 0! or 1! so factorial is basically like new=scale*old
+
+for floating point values or to tackle floating point values we add the check of n<=1 return the value of 1 else if someday this happened that the n value will become less than 1 like in the case of 1.5-1=0.5 so in this case the value will become 0.5 so In this case the check of n==1: return 1 will not work so we need this better check that deals with the values of 1! or <1! that is why we added the check of n<=1 now the recursive code to calculate factorial is given below,
+
+def factorial(n):
+	if n<=0:	
+		return 1
+	else:
+		return n*factorial(n-1)
+def taylor4(x):
+	"""implements exp(-2*x-1) by 4th order taylor series"""
+	return (1-2*(x+0.5)
+		 +2*(x+0.5)**2de
+		 -8./6.*(x+0.5)**3
+		 +16./24.*(x+0.5)**4)
+def taylorN(x,N=4):
+	y=np.zeros_like(x)
+	for n in range(N+1):
+		y+=(-2)**n/factorial(n)*(x+0.5)**n
+	return y
+x=np.linspace(-1.,4.,21)
+y=taylor4(x)
+yN=taylorN(x,N=10)
+#yN=taylorN(x,N=4) #uncomment it and run it and compare the result with our hard coded function taylor4(x), compare and see if both give same results
+yR=np.exp(-2*x-1) #directly finding the value of exponential functional and comparing it with the value of our self defined function taylor() the results will be a bit different because we don't know upto which N (order of taylor series) should we take to make the results of both taylorN() and np.exp() equal
+pl.plot(x,y)
+pl.plot(x,yN)
+pl.plot(x,yR)
+#pl.xlim([-1,0])
+#pl.ylim([0,2])	
+pl.show()
+
+
+for self understanding take taylor series here is applied on an exponential function that find the value by local approximation of that function and the exponentional function that is given is [	e superscript (-2*x-1)	] 
+
+exercise02.3
+
+we have seen how the coefficient of taylor series behave when we increase or decrease the order of taylor series, first they increase then they gradually decrease, here the coefficient are the values which are obtained by the term (f superscript n derivative(x)/n factorial), the values obtained from each order were 1,2,2,8/6,16/24 
+
+the second thing we've seen is about the polynomial order, when the (x-xnot) value is less than 1 taking polynomial order (aka taking power) of it will value give value more than the upcoming polynomial order and when the (x-xnot) value is more than 1 taking polynomial order of it gives value less than the upcoming polynomial order
+
+we find the taylor series N order approximation and we find the the function value by directly putting the value in it and then we compare both to find the error term between two
+
+the largest the number of the numpy array the larger the error will be for it as compared to function value at that point
+
+as you increase the order (N) of taylor series, the error will decrease for far values and if you decrease the order the error will start effecting the smaller aka starting values
+
+pointwise operation usually occur between arrays in programming, it takes  1 to 1 each corresponding element of array and perform operation between them and thus return us an array
+
+in python if you write array[-1] it means you are selecting the first element from the end side of array, you can also do array[ len(array) - 1 ] to select the ending element of an array
+
+two types of polynomials, even and uneven polynomial, even polynomial has plus sign and uneven polynomial has negative sign with it
+
+N = 40
+x = np.linspace(-1., 4., 21)
+y4 = taylor4(x)
+yN = taylorN(x, N)
+yR = np.exp(-2*x-1)
+
+abs_error = yN[-1] - yR[-1]
+print('N = %i abs. error = %1.3e' % (N, abs_error))
+
+lecture03
+
+now we will talk about meshing, gridded data and interpolation, we did 1-d grid generation, the 1-d array aka 1d numpy array is called as 1d grid, we will also study what is stretched grid
+
+openfoam is a CFD software, a very good example of CFD now a days is aeroplanes, their wings. keep in mind numerical calculations also have their limitations, there can be physical limitations and there can numerical limitations, wind turbines also work by fluid dynamics, we study the mechanism how to design the wind turbines so that they can use the fluid(wind) in order to move efficiently in CFD
+
+in a 2-d foil we cut out a portion of air-foil of plane and we observe how air flow is happening In that portion of the foil, we do it by using a structured grid, we did the whole portion into small portions(pieces) aka known as discretization and then we solve these discretize portions and thus eventually solves the whole system. the moral is that we have continuous problems, we discretize them into smaller problems and thus solve that problem, in 2d image picture we can easily find 2d cartesian plane for any point of that image portion, also for discretization we use floating point numbers, we can later on map our discretize portions to our cartesian plane(x,y plane) and thus we are mapping air flow to cartesian plane, we usually take integers in cartesian plane but to transform it to real world problems we might some times perform stretching the cartesian plane by some factors (delta x for stretch in x and delta y for stretch in y axis), we mostly need indexes whenever we are working in grids, there are not always axises are label as x and y axis, sometimes these can be label as I and j indexes 
+
+extension to 3d air-foil geometry, we can also go form 2d to 3d plane by adding another axis variable with I and j as k as third axis, we don't usually add energy I our conversions while studying flow of fluids in CFD 1 this is something we do in cfd2 or 3             we can stretch 2d object into 3d space by performing some sort of action like stretching, shearing etc 
+
+definations, mesh is discretization of the flow, like we said that we take a continuous thing and we discretize it into small portions inorder to solve it this is called as discretization, after discretization, discrete sections are formed and these discrete sections are called as mesh cell. each mesh cell is represented by a set of corners (usually 4 for a box aka square)
+
+we've generated a 1d lattice structure by the command of np.linspace() and thus we had 1d lattice from it 
+
+mesh generation is the process of constructing a mesh, this can be done by discretization or decomposition into smaller parts, this might involve numerical algorithm for decomposition or discretization
+
+once we done discretization, mean we did the gridding and now the data we have is called the gridded data, gridded data is represented when spatial data (like 4 corner points represent a square) is interpolated to the nodal points of the grid, resulting in a set of nodal values, we have terminologies like nodal points and nodal data, when nodal data is assigned to nodal points this is called as interpolation 
+
+channel flow in a 3d box, with walls on each sides and fluid flowing through it, the general idea is that the flow will be faster in the central region of the cube since there is no friction involve in centre and on the side portions(with the wall) the flow will be slow because of the frictions with the wall, we are taking a velocity of fluid as a vector v(x,t) which is depending on space(distance) and time, now discretize the velocity into mesh and assign in into cartesian plane (x i,j,k). x I,j,k are mesh coordinates, x Ijk can be used to point out any point in our grid space, it can also be called as positional vector. so it can be divided into (xijk=[xijk,yijk,zijk])=MESH/NODAL POINTS similarly like this the velocity can also be divided into 3 positional vectors as (uijk=[uijk,vijk,wijk])=GRIDDED DATA/NODAL VALUES, we can represent these nodal points and values with a numpy array
+
+we do grid stretching for the area near the wall to display the fluid velocity motion b/c of friction, this is done by a stretching function, in the area of more magnitude there will be high clustering and in the area of lower magnitude there is low clustering, we start with the equispaced grid then we mold the grid points according to our need 
+
+how to we do this molding/stretching, so instead of directly dealing with physical coordinates(x,y,z) we divide the the total size by unit interval 
+
+interpolation is important In multiple fields eg data science. data assimilation technique which is we take data from multiple sources and in order to achieve this we do interpolation, so first acquire data from various sources eg satellites, balloons etc then we interpolate data to various grids as needed by earth system models and then we provide gridded data interpolated to latitude-longitude grid 
+
+there are multiple interpolation techniques eg nearest neighbour, bilinear and bicubic
+
+if the problem is complex, go for simpler interpolations 
+
+1d interplolation example is piecewise constant interpolation in which you interpolate a point with respect to its neighbours, you give point to a function and function gives you the value(interpolation value) for that point
+
+another example is piecewise-linear interpolation
+
+another is higher order interpolation scheme
+
+interpolation is sometimes as a result of some connecting function (f(x))
+
+exercise03.1 
+ 
+mesh generation is the topic, in the exercise sheet on the start there is a section with the name goals, this section is from where the comprehension questions of paper come from in the exam. example is, what is matrices, what is 2-d arrays, what are n-d arrays
+
+array can have same data type eg array of temperatures, array of distances, array of locations. 
+
+in  numpy arrays we allocate some space and then we assign some values to that space, array can be multidimensional 1d 2d or nd, example of It is matrix=np.zeros([N1, N2, N3]), when we give tuples inside the np.zeros() it is showing that we want to make a multidimensional array, also numpy array is contegeous In memory. there are structured girds like cartensians grid(on cartesian plane) in which we can go on any location of cartesian plane, unstructured grid is like we have grids on multiple locations but we don't know about the connectivity among them aka we don't know about the neighbours and they are most difficult to deal with in the start, so we will start with structured grids
+
+extracting single element from numpy array we use angle brackets [] eg element = matrix(2, 3, 1) here 2 is showing 2 steps in x-axis, 3 steps in y-axis and 1 step in z-axis and in element variable we will have a value
+
+we can also use slicing index to extract multiple values from a dimension, slice can be subset of our data, slice is usually multiple numbers, if there are elements in an array and you can work with them so generally we use a loop to work with those elements or we can use slicing which is a more efficient and faster way eg of slicing is slice = matrix(:, 0, 0)
+
+we can also overwrite anything in a numpy array eg is matrix[2,3,1] = 99
+
+we can also overwrite a whole slice aswell, matrix[:, 0, 0] = np.linspace(-np.pi, np.pi, len(matrix[:, 0, 0]))
+
+sometimes we want to change the dimensions of an array example we have 1d array and we want to convert it to 2d or 3d array to work with it we can also do that, we can also flatten something so for this purpose reshape command is used  vector=np.arange(3*9) and matrix=vector.reshape((3,9)) at first 3*9 is showing we have 3*9 which is 27 elements in our numpy array then we are reshaping the array into 3 rows and 9 columns
+
+also when navigating through an array we use indexes to point out specific locations in an array and this is same for types of arrays for 1d, 2d and so on 
+
+longer variables names are self explanatory
+
+do library importing like numpy and matplotlib at the start and also you have to give tuple inside the np array function to tell the dimensions of the array that we want to create eg is matrixA=np.zeros((2,3)) the numpy array created will be of the dimensions 2x3 means 2 rows and 3 columns
+
+we can convert our list in python into an array matrixA=np.array([ [11,12,13], [21,22,23] ]) and then check shape of array using print("shape of matrixA = " ,np.shape(matrixA))
+
+import numpy as np
+matrix = np.array([[11,12,13],[21,22,23]])
+print("shape of matrixA = ", np.shape(matrixA))
+
+#%%
+
+print(matrix[0,1])
+
+python work in row major format aswell means it take first as row and navigate through it and then take second argument and y major and treat it then
+
+#%%
+print( matrixA[2,3] )
+
+you get index out of bound error with the above because we are accessing out of bounds of numpy array
+
+#%%
+print( matrixA[0,1] )
+
+#%%
+print( matrixA[5, 5] )
+
+#%%
+print( matrixA[1, 2] = 99.)
+print(f" {matrixA}" )
+
+here we are overwriting the array with the integer values with a floating point number but you'll see that the value in the array is changed but the floating point number we provided in now converted into integer and thus stored in the array  
+
+we can also printout the array with an another formatting method and that is by using the f format method, and it is like 
+
+#%%
+matrixA[1,2]=99.
+print(f"{matrixA=}")
+
+now that we know how to create a 2d array we can now work on grid generation like 2d grid generation 
+
+we've positional vector which we represent generally using the term xij where I is the position in x coordinate and j is the position in y coordinate
+
+we are drawing a vector xij in a grid, so the position of this vector xij will depends on its x and y coordinates which are (xij,yij) and also in some cases on other environmental factors like temperature pressure etc but not in this case we call them (gridded data), now xij is in a grid which has block multiple blocks if you go In the y direction of that grid space difference between each grid point is delta y which is uniform for all the points when moving in y and similarly for x each point is located at a difference of delta x in x axis and each point is located at a uniform distance from each other, this thing is also known as equi-distribution, we want to accomplish this whole thing by ourself, so first we have to generate a 2d grid by using np.zeros() then we will fill the 2d grid by using a for loop
+
+before using a library we must have to know how a library works with the data or how a library takes some input in which form in which shape 
+
+1 way to generate is like generate a 1d mesh grid array for x axis and then copy it for 4 to 5 times and by this we'll have a grid at the end similarly for y generate 1D mesh grid array and copy it 4 to 5 times and you'll have all y axis-es for your grid, we'll give the first 1d x array as xi and the first 1d y array as yj and we will generate these arrays with the np.linspace() 
+
+create a new project and save it with the name of task 2, also clean kernel so to remove all the variables from the space
+
+so basically we are generating a 2d grid of points so each point in the grid has x and y value, therefore we will make 2 matrices x2d which stores x values of each point and y2d which stored y values of each point, initially we will have zeros in both matrices then we will start filling them, one matrix will have x value of points and the other matrix will have y value of points, it will be 1 to 1 mean when you want to plot a point you'll take its x value from x2d matrix and its y value from y2d matrix, now you have both x and y value of point now you will plot this point and will do this for each point and at the end a grid will be formed of points. each point will have a unique x and y value in 2d plane
+
+we can also generate a 2d grid using numpy built in function np.meshgrid(x,y)
+
+import numpy as np
+import matplotlib.pyplot as pl 
+
+Nx = 50
+Ny = 30
+
+# 1-D coordinate arrays
+x = np.linspace(0., 4., Nx)
+y = np.linspace(-1, 1., Ny)
+
+# 2-D coordinate arrays to address ALL verix coordinates
+x2d = np.zeros((Nx, Ny))
+y2d = np.zeros((Nx, Ny))
+
+# fill in the coordinate values in 2-D arrays
+for j in range(Ny):
+	for I in range(Nx):
+		x2d[I,j] = x[i]
+		y2d[I,j] = y[j]
+
+# plot as scatter
+pl.plot(x2d, y2d, 'bo', mfc='none')
+# use meshgrid
+x2dMG, y2dMG = np.meshgrid(x, y)
+
+#plot as scatter
+pl.plot(x2dMG, y2dMG, 'r+')
+
+exercise03.2
+
+at some points we require higher number of grid points to solve our case, we do this by using  function usually some algebraic function/equation, these functions are also called as one dimensional stretching functions
+
+what is a stretched grid??
+
+we have a uniform  grid variable (sigh) which operates from zero to one 
+
+hyperbolic funcions like tanh are a combination of exponential function, j is grid index divided by number of grid points Ny. b is used for scaling and tan(b/2) in the bottom is normalizing function 
+
+in stretching points from the centre start moving outwards to the boundaries and thus we perform stretching, we want uniform distribution along x axis but we want stretching along y axis
+
+in stretching we do things monotonocally, uni-directional stretching occur in one direction, the stretching we did will relocate the points along y axis and thus by this the stretching  will occur, now we  want to parameterize the function that is performing the stretching, ny stretching function, we can judge how will our distribution look like, each stretching function is for specific type of problem, mean to get the solution of that specific type of problem
+
+for linear mapping we make sure that the length of the intervals remains the same 
+
+stretching function will look like, np.tanh(b*(sigh-1/2))/np.tanh(b/2)
+
+in numpy the log function is np.log()
+
+in high performance computing multiplication is much faster than addition 
+
+if sigh is an array the function will return array If sigh is a number the function will return a number 
+
+the un-stretched function  is the linear function simply y=ax+b
+
+stretching function  is basically conversion from the uniform interval to a final clustering of points, we can also do It in x direction as well
+
+import numpy as np
+import matplotlib.pyplot as pl
+Nx=50
+Ny=30
+#1-D coordinate arrays
+x=np.linspace(0.,4.,Nx)
+#y=np.linspace(0.,1.,Ny) #Replace by stretched coordinate
+#normalized "grid coordinate"
+xi=np.linspace(0.,1.,Ny)
+#define stretching function
+def symmetric_stretching(xi,a=0.99):
+	b=0.5*np.log((1+a)/(1.-a))
+	y=np.tanh(b*(xi-0.5)/np.tanh(0.5*b))
+	return y
+def unstretched(xi):
+	y=2.*xi-1.
+	return y
+#apply stretching
+y=symmetric_stretching(xi,a=0.99)
+y_unstretched=unstretched(xi)
+#plot stretching function
+pl.figure(1)
+pl.plot(xi,y_unstretched,'b--',lw=2,label='unstretched')
+pl.plot(xi,y,label='symm.stretch')
+pl.legend()
+pl.grid()
+#%%
+#generate 2d mesh (see previous exercise)
+x2d,y2d=np.meshgrid(x,y)
+#plot 2d mesh
+pl.figure(2)
+pl.plot(x2d,y2d,'r+')
+pl.show() 
+
+we can now change the variable a now to change how much stretching we want 	
+
+now open task from previous exercise and save the grid we made there in a readable format 
+
+path+'' here the path variable we attached make sure the path where the file will be stored 
+
+#%%
+#store grid to file (human readale)
+path='C:\Users\faral'
+np.savetxt(path+'uniform_x2d.csv',x2d,delimiter=',')
+np.savetxt(path+'uniform_x2d.csv',y2d,delimeter=',')
+
+now again to our current exercise
+
+#%%
+#load the uniform 2d mesh from previous task
+path='C:\Users\faral'
+x2d_uniform=np.loadtxt(path+'uniform_x2d.csv',delimiter=',')
+y2d_uniform=np.loadtxt(path+'uniform_x2d.csv',delimeter=',')
+#plot 2d mesh
+pl.figure(2)
+pl.plot(x2d_uniform,y2d_uniform,'bs',mfc='None')
+pl.grid()
+pl.show()
+
+exercise03.3
+
+best way to solve a problem is to divide it into smaller problems and then solve them one by one
+
+changing data into the form such that if fits into the function of library working
+
+high resolution cartesian grid means uniform grid structure(which will be made with the help of meshes)
+
+longer variable and function names are better, it allows us to search them easily
+
+import numpy as np
+import matplotlib.pyplot as pl
+from numpy import random as rnd
+#implement function f(x,y) in python
+def data(x,y):
+	return np.sin(2*np.pi*x)*np.cos(8*np.pi*y)*np.exp(-4*y**2)
+#high resolution structured uniform caresian grid
+x1d=np.linspace(0.,1.,200)
+y1d=np.linspace(0.,1.,200)
+#2d meshgrid
+x2d,y2d=np.meshgrid(x1d,y1d)
+#get gridded data for 2d meshes 
+z2d=data(x2d,y2d)
+#make a pseudo-color contour plot with 256 colour levels
+pl.xlabel('$x$ axis')
+pl.ylabel('$y$ axis')
+pl.colorbar()
+#now plot some random sampling points
+points=np.random.random_sample((100,2))
+xpts=points[:,0]
+ypts=points[:,1]
+pl.plot(xpts,ypts,'ko')
+#now get the low resolution data at sparse nonuniform sampling point
+zpts=data(xpts,ypts)
+#interpolate sampling point data to high-resolution grid for visualization
+zpts_interp_2d=griddata((xpts,ypts),zpts,(x2d,y2d),method='linear') #methods='linear' or methods='cubic' or method='nearest'
+#ploz interpolated values in a second figure
+pl.figure(2)
+pl.contourf(x2d,y2d,zpts_interp_2d,256)
+#plot random sampling points also in figure 2
+pl.plot(xpts,ypts,'ko')
+
+if you have more data to represent, you need more sampling points
+
+lecture 
+
+arithematic is exact means we still face the issue of number overflow in fixed point numbers
+
+to solve this overflowing problem we introduce the floating point numbers, In floating point numbers there are two things, mantiassa and exponent by the help of these two we adjust the size and accuracy of storing a number/value
+
+two numerical errors that are important to us in this course and these are rounding errors with floating point numbers and discretization errors
+
+now our task is to apply numerical methods like derivation and integration on our structured grids
+
+for derivative we divide the continuous problems into discrete parts known as nodal points and then we find the nodal values of those points using derivations
+
+central difference stencil gives the approximation round about in centre of the grid, like half data on right side and half on left
+
+lecture
+
+graphical interpretation slide, we want to check in it which diff whether forward,backward or central best align with the tangent to the slope which is this case is central diff because it looks like same like the tangent (straight line) while others diff are lil curvy to this tangent 
+
+by three ways we can find slope of the curve, three methods are forward difference approximation, backward difference approximation and central difference approximation
+
+when we change delta x to zero, all these three differentiations gives the same slope i.e keep this point in mind, results of all three will become same at this point
+
+error term is not the mistake itself, it tells us how much bigger or smaller is the mistake or how far we are from the correct results 
+
+higher order of polynomial, higher value of power p on error term delta x which is (big O of (delta x)power p), so higher the value of p, more fastly the delta x will about to reach 0, lower the power of p more times it takes for delta x to reach 0
+
+we've gridded data so we know the step size that is (delta x) 
+
+leading order error is quadratic in taylor series
+
+higher order means better results so is better accuracy
+
+double datatype can store value upto (10 power -16) digits among which 1 bit/digit will be used for sign bit and the restr of them will be significant bits
+
+(10 power -16) is the number representation and (delta x) Is the accuracy
+
+exercise04.1
+
+here we have two unknown variables, one is sigma and other is meu, so meu tells us the shift in right or left direction while the sigma is the variable that tell us the scale, larger or smaller (scale), also we can say it stretching, we have two sigma's in gaussian function, first one shows the vertical stretching while the second one shows the horizontal stretching, sigma and meu will later on come as mean and standard deviations 
+
+in the first derivative we find the local maxima by applying the tangent to that point, the point where tangent is steeper is the the local maximum point and is obtained by first derivative of the guassian function, we also call this point as inflection point 
+
+more sampling points smaller will be the error and less sampling points, chances are greater for larger error 
+
+####
+
+import numpy as np
+import matplotlib.pyplot as pl
+
+def gauss(x, mu=0.3, sigma=1.2):
+	return np.exp(-(x-mu)**2 / (2*sigma**2)) / np.sqrt(2*np.pi*sigma**2)
+
+def gaussDeriv1(x, mu=0.3, sigma=1.2):
+	return -(x-mu) / sigma**2 * gauss(x, mu, sigma)
+
+def forwardDiff():
+	z = np.zeros_like(x)
+	for I in range(1, len(x), 1):
+		z[i] = (y[i+1] - y[i]) / (x[i+1] - x[i])
+	return z
+
+def centralDiff(x, y):
+	z = np.zeros_like(x)
+	for I in range(1, len(x)-1, 1):
+		z[i] = (y[i+1] - y[i-1]) / (x[i+1] - [xi-1])
+	return z
+
+def centralDiff_2ndDeriv(x, y):
+	z = np.zeros_like(x)
+	for I in range(1, len(x)-1, 1):
+		z[i] = (y[i+1] - 2*y[i]) + y[i-1] / ((x[i+1] - [xi-1]) * 0.5)**2
+	return z
+
+#generate 1-D grid
+x = np.linspace(-5., 5, 1001) #TODO: fix grid resolution
+#x = np.linspace(-5., 5., 11)
+
+#compute function values
+y = gauss(x)
+
+#compute 1st deriv analytically
+y_deriv1 = gaussDeriv1(x)  
+
+#compute 1st deriv numerically
+y_fdm1 = forwardDiff(x, y)
+y_cdm1 = centralDiff(x, y)
+
+#compute 2nd derivative
+y_fdm2 = forwardDiff(x, y_fdm1)
+y_cdm2 = centralDiff_2ndDeriv(x, y)
+
+#plot
+pl.plot(x, y, 'k-', label='Gauss curve')
+pl.plot(x, y_deriv1, 'k--', label='first deriv.' )
+
+pl.plot(x, y_fdm1, 'r+:', label='forward FDM first deriv.')
+pl.plot(x, y_cdm1, 'b.:', label='central FDM first deriv.')
+
+pl.plot(x, y_fdm2, 'g-', label='forward FDM first deriv. twice')
+pl.plot(x, y_cdm2, 'g+', label='central FDM second deriv.')
+
+pl.xlabel('x')
+pl.ylabel('y')
+
+pl.grid()
+
+pl.legend()
+
+####
+
+second derivative part is just for understanding not for exams
+
+exercise04.2
+
+we have 1000 intervals and we have 1001 nodal points aka vertices, the size of interval is between the range [-5, 5]
+
+for the first derivative we need 1 additional ghost point, in terms of ghost point or full domain case (dealing sub-domains) we will need two additional points if we are solving it using central differentiation method so we will will need the array of vertices of size 1002
+
+similarly if we are going to compute second derivative, we will need 4 additional points, two on both sides to (4 ghost points in total) so we will need an array of size 1004
+
+####
+
+import numpy as np
+import matplotlib.pyplot as pl
+
+def gauss(x, mu=0.3, sigma=1.2):
+	return np.exp(-(x-mu)**2 / (2*sigma**2)) / np.sqrt(2*np.pi*sigma**2)
+
+def gaussDeriv1(x, mu=0.3, sigma=1.2):
+	return -(x-mu) / sigma**2 * gauss(x, mu, sigma)
+
+def forwardDiff():
+	z = np.zeros_like(x)
+	for I in range(1, len(x), 1):
+		z[i] = (y[i+1] - y[i]) / (x[i+1] - x[i])
+	return z
+
+def centralDiff(x, y):
+	z = np.zeros_like(x)
+	for I in range(1, len(x)-1, 1):
+		z[i] = (y[i+1] - y[i-1]) / (x[i+1] - [xi-1])
+	return z
+
+def centralDiff_2ndDeriv(x, y):
+	z = np.zeros_like(x)
+	for I in range(1, len(x)-1, 1):
+		z[i] = (y[i+1] - 2*y[i]) + y[i-1] / ((x[i+1] - [xi-1]) * 0.5)**2
+	return z
+
+def getError(yNum, yRef):
+	return np.abs(yNum, yRef)
+
+#generate 1-D grid
+x = np.linspace(-5., 5, 1401) #TODO: fix grid resolution
+#x = np.linspace(-5., 5., 11)
+
+#xWithGhostPts = np.linspace(-5.-dx, 5.+dx, 1003)
+#x = xWithGhostPts #CAUTION: OVERWRITES x ARRAY !!!
+
+#compute function values
+y = gauss(x)
+
+#compute 1st deriv analytically
+y_deriv1 = gaussDeriv1(x)  
+
+#compute 1st deriv numerically
+y_fdm1 = forwardDiff(x, y)
+y_cdm1 = centralDiff(x, y)
+
+#compute 2nd derivative
+y_fdm2 = forwardDiff(x, y_fdm1)
+y_cdm2 = centralDiff_2ndDeriv(x, y)
+
+#compute errors
+err_fdm1 = getError(y_fdm1, y_deriv1)
+err_cdm1 = getError(y_cdm1, y_deriv1)
+
+err_fdm1 = getError(y_fdm2, y_cdm2 ) #NOTE: y_cdm2 as approx. reference
+#err_cdm2 = getError(y_cdm2, y_deriv2)
+
+#plot
+pl.plot(x[1:1002], y[1:1002], 'k-', label='Gauss curve')
+pl.plot(x[1:1002], y_deriv1[1:1002], 'k--', label='first deriv.' )
+
+pl.plot(x[1:1002], y_fdm1[1:1002], 'r+:', label='forward FDM first deriv.')
+pl.plot(x[1:1002], y_cdm1[1:1002], 'b.:', label='central FDM first deriv.')
+
+pl.plot(x[1:1002], y_fdm2[1:1002], 'g-', label='forward FDM first deriv. twice')
+pl.plot(x[1:1002], y_cdm2[1:1002], 'g+', label='central FDM second deriv.')
+
+pl.xlabel('x')
+pl.ylabel('y')
+
+pl.grid()
+
+pl.legend()
+
+#----------
+
+pl.figure(2)
+
+pl.semilogy(x, err_fdm1, 'r+:', label='forward FDM first deriv.')
+pl.plot(x, err_cdm1, 'b.:', label='central FDM first deriv.')
+
+pl.plot(x, err_fdm2, 'g-', label='forward FDM first deriv. twice')
+
+#pl.yscale('log')
+
+pl.axhline(1.e-3, linewidth=3, color='k')
+
+pl.xlabel('x')
+pl.ylabel('abs.error')
+
+pl.grid()
+
+pl.legend()
+
+pl.show()
+
+####
+
+logarithmic stretching, we use it for stretching purpose
+
+we use pl.semilogy(x,y) so it is basically targeting the y axis as you can see by the term semilog'y' 
+
+logarithmic plotting tells us about the spatial structure of the error thus we can do better analysis, generally we use linear scaling but here today we tested logarithmic scaling aswell
+
+
+lecture
+
+finite volume method (fvm) 
+
+discretization: division of the computational domain into finite volume cells
+
+for greater accuracy we can also take uniform grid
+
+instead of straight line expansion, we can also use polynomial type expansion
+
+there two types of newton cotes formulas, closed formula and open formula, closed is the one in which the boundary points are included while the open formulas are the one in which the boundary points are not included
+
+for lower sum, we need one point and one width of the interval to find the lower sum, the larger the interval size is the larger the error will  become, and in the lower sum we look at the x-axis in forward direction, in the upper sum we look along the x-axis but in the backward  direction 
+
+In trapezoidal rule, half of the contribution is from the upper sum and half of the contribution is of lower sum
+
+the error contribution of the trapezoidal rule and mid point rule are almost same 
+
+for leading order, we usually consider the taylor series of order two
+
+exercise05
+
+sometimes you don't know what to do so in this case it is better to use placeholders and comments in the code so to make a pathway of the code like this
+
+####
+# modules
+import numpy as np
+import matplotlib.pyplot as pl
+
+# function definitions 
+def f(x):
+	return 1./(1.+x)
+
+def lowerSum(a, b, N):
+	# TODO: implement summation algorithm for quadrature rule
+	h = (b-a)/N
+	I = 0.
+	for i in range(N):
+		xi = a + h*I # nodal point coordinate
+		I += f(xi)*h # nodal value
+	return #...
+		return I
+
+def trapezoidalRule(a, b, N):
+	h = (b-a)/N
+	I = 0.
+	for i in range(N):
+		xi = a + h*i # nodal point coordinate left
+		xip = xi + h # nodal point coordinate right
+		I += (f(xi) + f(xip))*h*0.5 # nodal value left + right
+	return I
+
+
+# main program
+h = 1.e-2 #h = 1.e-4  or use h = 1.e-9 for more accuracy
+N = int((0+1)./h + 0.5)
+print('N = ', N)
+print('analyticValue   = ', np.log(2.))
+print('lowerSum        = ', lowerSum(0., 1., N))
+print('trapezoidalRule = ', trapezoidalRule(0., 1., N))
+
+#visualization: compute the integral I numerically for multiple h then plot
+
+listOfStepSizes = []
+listOfLowerSumValues = []
+listOfLowerSumErrors = []
+
+listOfTrapezoidalValues = []
+listOfTrapezoidalErrors = []
+
+for h in [1.e-1, 1.e-2, 1.e-3, 1.e-4, 1.e-5, 1.e-6, 1.e-7]:
+	N = int(1./h + 0.5)
+	Ilower = lowerSum(0., 1., N)
+	Itrapezoidal = trapezoidalRule(0., 1., N)
+
+	listOfStepSizes.append(h)
+	listOfLowerSumValues.append(Ilower)
+	listOfLowerSumErrors.append(Ilower - np.log(2.))
+
+	listOfTrapezoidalValues.append(Itrapezoidal)
+	listOfTrapezoidalErrors.append(np.abs(Itrapezoidal-np.log(2.)))
+
+#pl.plot(listOfStepSizes, listOfLowerSumValues, 'bo')
+pl.loglog(listOfStepSizes, listOfLowerSumErrors, 'rs:')
+pl.loglog(listOfStepSizes, listOfTrapezoidalErrors, 'g^:')
+
+pl.xlabel('step size $h$')
+#pl.ylabel('integral $I_h$')
+pl.ylabel('error $varepsilon_h$')
+
+pl.grid()
+
+pl.show()
+
+####
+
+lecture
+
+ordinary differential equations are the equations which depends on one variable aka parameter only, the differential equations which depend on more than one parameter is called as partial differential equation
+
+anti derivative means basically taking the integration of the equation
+
+we have ordinary differential equations and find solution of these using integration
+
+definite integral is the on which has some defined boundaries such as lower limit starting from zero and upper limit is t
+
+integration with both upper and lower limit zero is automatically zero 
+
+the flow from the known to the unknown as called as the rate expression 
+
+Lorenz system is the coupled ordinary differential equations in which have to find the values of unknown variables under control parameters (temperature, pressure, density) and then solve the differential equations, this is called as the Lorenz system
+
+Lorenz system is the part of dynamic systems, if you want to solve Lorenz system do study the dynamics systems
+
+exercise06
+
+####
+
+# modules
+import matplotlib.pyplot as pl
+import numpy as np
+
+from mpl_toolkits.mplot3d import Axes3D
+
+# parameters
+s = 10.
+r = 28.
+b = 8./3.
+
+tEnd = 40  # sec
+dt = 1.e-3 # sec
+
+# initial condition
+t0 = 0. #sec
+x0 = -8.
+y0 = -1.
+z0 = 33.
+
+# make room for data storage, fill in initial condition
+tValues = [t0]
+xValues = [x0]
+yValues = [y0]
+zValues = [z0]
+
+# init. time series
+t = t0
+x = x0
+y = y0
+z = z0
+
+# time loop
+while t <= tEnd:
+	# explicit Euler (lower sum), just one step from n to n+1 for variables
+	
+	#xNew = x + Rx * dt
+	#yNew = y + Ry * dt
+	#zNew = z + Rz * dt
+		
+	xNew = x + ( s*(y-x)    ) * dt
+	yNew = y + ( (r-z)*x - y) * dt
+	zNew = z + ( x*y - b*z  ) * dt
+	
+	# time update
+	tNew  = t + dt
+	
+	# synchronize
+	x = xNew
+	y = yNew
+	z = zNew
+	t = tNew
+
+	# append new values to the data storage lists
+	tValues.append(t)
+	xValues.append(x)
+	yValues.append(y)
+	zValues.append(z)
+
+# convert simulation results to numerical array
+tValues = np.array(tValues)
+xValues = np.array(xValues)
+yValues = np.array(yValues)
+zValues = np.array(zValues)
+
+#%%
+
+path = '' # give the path here where you want to save
+np.save(path+'tValues', tValues)
+np.save(path+'xValues', xValues)
+np.save(path+'yValues', yValues)
+np.save(path+'zValues', zValues)
+
+checksum = xValues.sum()
+print(f'{checksum=}')
+
+#%%
+
+# plot the data
+pl.figure(1)
+pl.plot(tValues, xValues, 'b-') # time series x(t) at discrete times
+pl.plot(tValues, yValues, 'r-') # time series y(t) at discrete times
+pl.plot(tValues, zValues, 'g-') # time series z(t) at discrete times
+
+pl.xlabel('$t$')
+pl.ylabel('$x, y, z$')
+
+pl.figure(2)
+pl.plot(xValues, yValues, 'k-') # parametric plot x(t) vs. y(t) co-relation between two dynamic variables
+
+pl.xlabel('$x$')
+pl.ylabel('$y$')
+
+#%%
+
+# multiple subplots
+
+pl.figure(3)
+fig, axs = pl.subplots(2, 2)
+axs[0, 0].plot(xValues, yValues, 'k-')
+axs[0, 0].set_xlabel('x')
+axs[0, 0].set_ylabel('y')
+
+axs[0, 1].plot(xValues, zValues, 'b-')
+axs[0, 1].set_xlabel('x')
+axs[0, 1].set_ylabel('z')
+
+axs[1, 0].plot(yValues, zValues, 'r-')
+axs[1, 0].set_xlabel('x')
+axs[1, 0].set_ylabel('y')
+
+axs[1, 1].plot(xValues+yValues, xValues-yValues, 'g-')
+axs[1, 1].set_xlabel('x+y')
+axs[1, 1].set_ylabel('x-y')
+
+#%%
+
+# 3D plot
+
+fig = plt.figure(4)
+ax = fig.add_subplot(111, projection='3d')
+
+ax.plot(xValues+yValues, xValues-yValues, zValues, 'r-')
+
+ax.set_xlabel('x+y')
+ax.set_ylabel('x-y')
+ax.set_zlabel('z')
+
+pl.show()
+
+####
+
+lecture
+
+statistical modelling is a lot cheaper and cost efficient than normal 3d modelling, it is generally done in 1d space which saves a lot of resources than 3d representation models 
+
+Reynolds decomposition is like dividing the quantity into mean state and fluctuation state
+
+mean is also called as first statistical moment
+
+variance is the standard deviation square
+
+to define variance, atleast two points are required 
+
+exercise07.1
+
+probability density function is a function so function is continuous aka smooth while histogram is discrete, it works on discrete data
+
+mean value is a one number which quantifies our data
+
+####
+
+import numpy as np
+import matplotlib.pyplot as pl 
+
+# load array data
+path = '' # add path accordingly
+tValues = np.load(path+'tValues.npy')
+xValues = np.load(path+'xValues.npy')
+yValues = np.load(path+'yValues.npy')
+zValues = np.load(path+'zValues.npy')
+
+# verify the data
+#pl.plot(xValues, yValues, 'r-')
+
+#checksum = xValues.sum()
+#print(f'{checksum=}')
+
+# basic stats
+def mean(data1d):
+	mean = 0.
+	for i in range(len(data1d)):
+		mean += data1d[i]
+	mean /= len(data1d)
+	return mean
+
+def variance_unbiased(data1d):
+	mean1d1 = mean(data1d)
+	variance = 0.
+	for i in range(len(data1d)):
+		variance += (data1d[i] - mean1d1)**2
+	variance /= (len(data1d) - 1)
+	return variance
+
+def variance_biased(data1d): 
+	mean1d1 = mean(data1d) 	  # 1st moment
+	mean1d2 = mean(data1d**2) # 2nd momemnt
+	variance = mean1d2 - mean1d1**2
+	return variance 
+
+#%%
+
+# compute stats for given data
+meanX = mean(xValues)
+meanY = mean(yValues)
+
+meanXref = np.mean(xValues)
+meanYref = np.mean(yValues)
+
+pl.plot(meanX	, meanY	  , 'ko', ms=10)
+pl.plot(meanXref, meanYref, 'c*', ms=10)
+
+print(f'{meanX=}')
+print(f'{meanXref=}')
+
+varXu = variance_unbiased(xValues)
+varXb = variance_biased(xValues)
+varXr = np.var(xValues)
+
+print(f'{varXu=}')
+print(f'{varXb=}')
+print(f'{varXr=}')
+
+varYu = variance_unbiased(yValues)
+varYb = variance_biased(yValues)
+varYr = np.var(yValues)
+
+stddevX = np.sqrt(varXr)
+stddevY = np.sqrt(varYr)
+
+pl.axhline(meanY, color='k', ls='--')
+pl.axhline(meanY+stddevY, color='k', ls=':')
+pl.axhline(meanY-stddevY, color='k', ls=':')
+
+pl.axvline(meanX, color='k', ls='--')
+pl.axvline(meanX+stddevX, color='k', ls=':')
+pl.axvline(meanX-stddevX, color='k', ls=':')
+
+#%%
+
+# histograms and PDF
+pl.figure(1)
+pl.plot(xValues, tValues, 'b-')
+pl.xlabel('x')
+pl.ylabel('t')
+
+pl.figure(2)
+pl.hist(xValues, bins=20  , normed=True)
+pl.hist(xValues, bins=200 , normed=True)
+pl.hist(xValues, bins=2000, normed=True)
+pl.xlabel('x')
+pl.ylabel('probability density function (PDF)')
+
+#%%
+
+pl.figure(3)
+pl.plot(x, y, 'b-')
+
+pl.figure(3)
+#pl.hist2d(x, y, bins=40)
+
+from whist2d import Whist2D
+
+whist2d = Whist2D(x, y, bins=40)
+whist2d.plot()
+
+pl.show()
+
+####
+
+probability density function makes sure that the area under the bins of histogram goes to 1 
+
+lecture
+
+2 factor authentication means we working with random numbers in the backend
+
+entropy is the measured of un-orderness
+
+lcg we are commonly getting integer numbers
+
+getting random number from a distribution that is non-uniform, so get random number from either two ways either from a uniform distribution or either from a non-uniform distribution
+
+commulative density function(CDF) is an inversion of PDF
+
+guassian distribution is a non-uniform 	distribution
+
+exercise08
+
+####
+
+import numpy as np
+import numpy.random as rd 
+import matplotlib.pyplot as pl
+
+#%% 
+
+x = rd.rand(20)
+print(x)
+
+#%%
+
+#u = rd.uniform(-3., 5., 20)
+#u = (5.-(-3.))*x + (-3). # alternative
+u = 8.*x - 3
+
+print(u)
+
+pl.figure(1)
+pl.plot(u, 'o')
+
+pl.xlabel('index i of the array elements')
+pl.ylabel('random value u[i]')
+
+#%%
+
+bins = np.linspace(-3., 5., 9000)
+
+pl.figure(2)
+pl.xlabel('bins')
+pl.ylabel('counts per bin')
+pl.hist(u, bins=bins)
+
+####
+
+####
+
+import numpy as np
+import numpy.random as rd
+import matplotlib.pyplot as pl 
+
+dice = rd.randint(1, 7, 5000)
+
+pl.figure(1)
+pl.xlabel('dice roll number i')
+pl.ylabel('dice result')
+pl.plot(dice, 'o')
+
+bins = np.linspace(0.5, 6.5, 7)
+
+pl.figure(2)
+pl.xlabel('dice results (bins)')
+pl.ylabel('probability density')
+pl.hist(dice, bins=bins, density=True)
+
+p = 1. / 6. 
+pl.axhline(p, color='k', ls='--')
+
+mean = np.mean(dice)
+stddev = np.std(dice)
+print('mean stddev = ', mean, stddev)
+
+####
+
+####
+
+import numpy as np
+import numpy.random as rd
+import matploblib.pyplot as pl 
+
+N = 50000
+
+r = rd.exponential(size=50000)
+
+pl.figure(1)
+pl.xlabel('sample index')
+pl.ylabel('random value')
+pl.plot(r, 'o')
+
+bins = np.linspace(0., 10., 101)
+
+pl.figure(2)
+pl.xlabel('bins')
+pl.ylabel('probability density')
+pl.hist(r, bins=bins, density=True, color='b')
+
+#%%
+
+u = rd.rand(50000)
+
+n = -np.log(1. - u)
+
+pl.hist(n, bins=bins, density=True, color='r')
+
+#%%
+
+x = np.linspace(0., 10., 200)
+p = np.exp(-x)
+pl.plot(x, p, 'k--') 
+
+pl.xlim([0., 10.])
+
+pl.draw()
+
+####
+
+-----------
+
+third time repeat
+
+-----------
+
+exercise01.2
+
+####
+
+#from numpy import sin
+import numpy as np
+import matplotlib.pyplot as pl
+
+# generate the 1D grid
+
+x = np.linspace(0., 1., 11)
+h = x[1] - x[0]        # stepsize
+
+# function implementations
+y1 = 1. -2*x           # this is function f_1(x)
+y2 = (x - 0.4)**2      # this is function f_2(x)
+y3 = np.sin(2*np.pi*x) # this function f_3(x)
+
+# filtering of data
+xFiltered = x[ x <= 0.5 ]
+y3Filtered = y3[ x <= 0.5] 
+
+# plot data according tasks 
+pl.plot(x, y1, 'r--', label='f_1')
+pl.plot(x, y2, 'b-',  label='f_2')
+pl.plot(x, y3, 'g:',  label='f_3')
+#pl.plot(xFiltered, y3Filtered, 'go', label='f_3 filtered')
+pl.plot(x[x <= 0.5], y3[x <= 0.5], 'go', label='f_3 filtered')
+
+
+pl.grid()
+
+pl.xlabel('x')
+pl.ylabel('y')
+pl.title('Figure 1')
+
+pl.legend()
+
+####
+
+
